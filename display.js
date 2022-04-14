@@ -1,6 +1,9 @@
 import { tables } from "./constants.js";
+import { Candidate } from "./algorithm.js";
 
 const CONTAINER = document.querySelector(".tables");
+
+let counter = 7;
 
 function createContainer() {
   CONTAINER.innerHTML = "";
@@ -61,6 +64,8 @@ function getKeysAndDisplayKeys(e) {
 
 createContainer();
 
+let entitiesMain = [];
+
 const btnNumEntites = document.querySelector("#btn-entities-num");
 btnNumEntites.addEventListener("click", displayInputEntities);
 
@@ -81,10 +86,12 @@ btnEntities.addEventListener("click", setEntities);
 
 function setEntities() {
   const entities = document.querySelectorAll(".entity");
-  console.log(entities);
+  for (let i = 0; i < entities.length; i++) {
+    entitiesMain.push(entities[i].value);
+  }
 }
 
-const btnNumDependencies = document.querySelector("#btn-entities-num");
+const btnNumDependencies = document.querySelector("#btn-dependencies-num");
 btnNumDependencies.addEventListener("click", displayInputDependencies);
 
 function displayInputDependencies(e) {
@@ -94,9 +101,38 @@ function displayInputDependencies(e) {
 
   for (let i = 0; i < numDependencies; i++) {
     const div = document.createElement("DIV");
-    const inputNodeLeft = document.createElement("INPUT");
-    const inputNodeRight = document.createElement("INPUT");
+    dependencies.insertBefore(div, btnDependencies);
 
-    dependencies.insertBefore(inputNode, btnDependencies);
+    const inputNodeLeft = document.createElement("INPUT");
+    inputNodeLeft.classList.add("left");
+    const inputNodeRight = document.createElement("INPUT");
+    inputNodeRight.classList.add("right");
+
+    div.appendChild(inputNodeLeft);
+    div.append(" --> ");
+    div.appendChild(inputNodeRight);
   }
+}
+
+const btnDependencies = document.querySelector("#btn-dependencies");
+btnDependencies.addEventListener("click", setDependencies);
+
+function setDependencies() {
+  const dependenciesLeft = document.querySelectorAll(".left");
+  const dependenciesRight = document.querySelectorAll(".right");
+  const newMap = new Map();
+
+  for (let i = 0; i < dependenciesLeft.length; i++) {
+    const arrLeft = dependenciesLeft[i].value.split(",");
+    const arrRight = dependenciesRight[i].value.split(",");
+    newMap.set(arrLeft, arrRight);
+  }
+
+  setTable(newMap);
+}
+
+function setTable(newMap) {
+  tables.push(new Candidate(entitiesMain, newMap, counter));
+  counter++;
+  createContainer();
 }
