@@ -1,11 +1,12 @@
 export class Candidate {
-  constructor(table, dependencies) {
+  constructor(table, dependencies, id) {
+    this.id = id;
     this.TABLE = table;
     this.DEPENDENCIES = dependencies;
     this.MINIMAL_KEYS = [];
   }
 
-  expandKey(firstKey, rightAttributes, helpers = []) {
+  expandKey(firstKey, rightAttributes, helpers) {
     for (let i = 0; i < this.TABLE.length; i++) {
       if (!rightAttributes.includes(this.TABLE[i])) {
         const newHelpers = [...helpers, this.TABLE[i]];
@@ -22,7 +23,7 @@ export class Candidate {
     });
   }
 
-  thirdAxiom(firstKey, rightAttributes = [], currentRuns, helpers) {
+  thirdAxiom(firstKey, rightAttributes, currentRuns, helpers) {
     if (this.TABLE.length === rightAttributes.length) {
       this.MINIMAL_KEYS.push([...firstKey, ...helpers]);
       return;
@@ -65,7 +66,7 @@ export class Candidate {
         rightAttributes.push(key);
       });
 
-      this.thirdAxiom(leftAttributes, rightAttributes, 0);
+      this.thirdAxiom(leftAttributes, rightAttributes, 0, []);
     }
 
     this.filterMinimalKeys();
