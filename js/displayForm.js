@@ -7,23 +7,21 @@ let counter = tables.length + 1;
 export function displayInputEntities() {
   const entities = document.querySelector(".entities");
   const numEntities = document.querySelector("#num-entities").value;
-  const btnEntities = document.querySelector("#btn-entities");
 
   for (let i = 0; i < numEntities; i++) {
     const inputNode = document.createElement("INPUT");
     inputNode.classList.add("entity");
-    entities.insertBefore(inputNode, btnEntities);
+    entities.appendChild(inputNode);
   }
 }
 
 export function displayInputDependencies() {
   const dependencies = document.querySelector(".dependencies");
   const numDependencies = document.querySelector("#num-dependencies").value;
-  const btnDependencies = document.querySelector("#btn-dependencies");
 
   for (let i = 0; i < numDependencies; i++) {
     const div = document.createElement("DIV");
-    dependencies.insertBefore(div, btnDependencies);
+    dependencies.appendChild(div);
 
     const inputNodeLeft = document.createElement("INPUT");
     inputNodeLeft.classList.add("left");
@@ -53,6 +51,12 @@ export function setTable() {
     const arrRight = dependenciesRight[i].value.split(",");
     newMap.set(arrLeft, arrRight);
   }
+
+  const dependenciesDiv = document.querySelector(".dependencies");
+  const entitiesDiv = document.querySelector(".entities");
+
+  dependenciesDiv.innerHTML = "";
+  entitiesDiv.innerHTML = "";
 
   tables.push(new Candidate(entitiesMain, newMap, counter));
   counter++;
