@@ -8,8 +8,7 @@ html {
   font-size: 62.5%;
 }
 
-ul,
-ol {
+ul {
   list-style: none;
   padding: 0;
 }
@@ -35,13 +34,16 @@ ol {
 .tables__btn-get {
   font-size: clamp(1.5rem, 1.5vw, 2rem);
 }
+.tables__btn-del {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+}
 
 form {
   width: min(100rem, 80%);
   margin: 0 auto;
-  background-color: aliceblue;
+  background-color: rgb(197, 212, 212);
   padding: 20px;
 }
 form * {
   font-size: clamp(1.5rem, 1.5vw, 2rem);
-} /*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

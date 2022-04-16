@@ -1,6 +1,7 @@
 import { tables } from "./constants.js";
 import { getKeysAndDisplayKeys } from "./displayKeys.js";
-//delete button
+import { findIndexOfTable } from "./utils.js";
+
 export function createTableContainer() {
   const CONTAINER = document.querySelector(".tables");
 
@@ -29,7 +30,11 @@ export function createTableContainer() {
   });
 }
 
-function deleteTable() {}
+function deleteTable(e) {
+  e.target.parentNode.remove();
+  const index = findIndexOfTable(tables, e.target.dataset.id);
+  tables.splice(index, 1);
+}
 
 function createDelButton(container, table_id) {
   const DEL_BUTTON = document.createElement("BUTTON");

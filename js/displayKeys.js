@@ -1,17 +1,10 @@
 import { tables } from "./constants.js";
+import { findIndexOfTable } from "./utils.js";
 
 export function getKeysAndDisplayKeys(e) {
-  const index = findTable(e.target.dataset.id);
+  const index = findIndexOfTable(tables, e.target.dataset.id);
   const keys = getKeys(index);
   displayKeys(keys, e);
-}
-
-function findTable(table_id) {
-  for (let i = 0; i < tables.length; i++) {
-    if (tables[i].id == table_id) {
-      return i;
-    }
-  }
 }
 
 function getKeys(table_id) {
