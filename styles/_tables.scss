@@ -1,0 +1,26 @@
+.tables {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__table {
+    padding: 15px;
+    margin: 15px;
+    background-color: rgb(197, 212, 212);
+  }
+
+  &__entities {
+    font-size: $font-size-sm;
+  }
+
+  &__dependency {
+    font-size: $font-size-sm;
+  }
+
+  &__key {
+    font-size: $font-size-sm;
+  }
+
+  &__btn-get {
+    font-size: $font-size-sm;
+  }
+}

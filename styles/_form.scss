@@ -1,0 +1,9 @@
+form {
+  width: min(100rem, 80%);
+  margin: 0 auto;
+  background-color: aliceblue;
+  padding: 20px;
+  * {
+    font-size: $font-size-sm;
+  }
+}

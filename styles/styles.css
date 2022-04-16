@@ -1,0 +1,47 @@
+body,
+html {
+  font-family: "Courier New", Courier, monospace;
+}
+
+* {
+  margin: 0;
+  font-size: 62.5%;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+.tables {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tables__table {
+  padding: 15px;
+  margin: 15px;
+  background-color: rgb(197, 212, 212);
+}
+.tables__entities {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+}
+.tables__dependency {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+}
+.tables__key {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+}
+.tables__btn-get {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+}
+
+form {
+  width: min(100rem, 80%);
+  margin: 0 auto;
+  background-color: aliceblue;
+  padding: 20px;
+}
+form * {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+} /*# sourceMappingURL=styles.css.map */
