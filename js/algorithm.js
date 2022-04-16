@@ -46,17 +46,42 @@ export class Candidate {
     return this.thirdAxiom(firstKey, rightAttributes, ++currentRuns, helpers);
   }
 
-  filterMinimalKeys() {
-    this.MINIMAL_KEYS.sort((a, b) => a.length - b.length);
-    this.MINIMAL_KEYS = this.MINIMAL_KEYS.filter(
-      (key) => key.length == this.MINIMAL_KEYS[0].length
-    );
-    return this.MINIMAL_KEYS.filter(
-      (key) => key.length == this.MINIMAL_KEYS[0].length
-    );
+  removeDuplicates() {
+    for (let i = 0; i < this.MINIMAL_KEYS.length; i++) {
+      for (let j = 0; j < this.MINIMAL_KEYS.length; j++) {
+        if (i === j) {
+          continue;
+        }
+
+        let keyCounter = 0;
+
+        this.MINIMAL_KEYS[i]?.forEach((key) => {
+          if (this.MINIMAL_KEYS[j].includes(key)) {
+            keyCounter++;
+          }
+        });
+
+        if (keyCounter == this.MINIMAL_KEYS[j].length) {
+          this.MINIMAL_KEYS.splice(j, 1);
+          i = 0;
+        }
+      }
+    }
   }
 
-  getCandidateKeys() {
+  filterMinimalKeys() {
+    const MIN_LENGTH = this.MINIMAL_KEYS.reduce((prev, next) =>
+      prev.length > next.length ? next : prev
+    );
+
+    this.MINIMAL_KEYS = this.MINIMAL_KEYS.filter(
+      (key) => key.length == MIN_LENGTH.length
+    );
+
+    this.removeDuplicates();
+  }
+
+  calculateMinimalKeys() {
     this.MINIMAL_KEYS = [];
 
     for (const [leftAttributes] of this.DEPENDENCIES) {
@@ -70,5 +95,7 @@ export class Candidate {
     }
 
     this.filterMinimalKeys();
+
+    return this;
   }
 }

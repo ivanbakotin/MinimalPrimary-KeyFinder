@@ -4,30 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="display.js" type="module"></script>
-    <title>Candidate Key</title>
+    <script defer src="./js/index.js" type="module"></script>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Minimal Key</title>
   </head>
   <body>
     <main>
-      <div class="tables"></div>
+      <section class="tables"></section>
+      <form>
+        <h1>Add table</h1>
+        <label for="num-entities">How many entities do you want?</label>
+        <input type="number" name="num-entities" id="num-entities" />
+        <button id="btn-entities-num" type="button">SET</button>
 
-      <label for="num-entities">How many entities do you want?</label>
-      <input type="number" name="num-entities" id="num-entities" />
-      <button id="btn-entities-num" type="button">SET</button>
+        <fieldset class="entities">
+          <legend>Set your entities:</legend>
+        </fieldset>
 
-      <fieldset class="entities">
-        <legend>Set your entities:</legend>
-        <button id="btn-entities" type="button">SET</button>
-      </fieldset>
+        <label for="num-dependencies">How many dependencies do you want?</label>
+        <input type="number" name="num-dependencies" id="num-dependencies" />
+        <button id="btn-dependencies-num" type="button">SET</button>
 
-      <label for="num-dependencies">How many dependencies do you want?</label>
-      <input type="number" name="num-dependencies" id="num-dependencies" />
-      <button id="btn-dependencies-num" type="button">SET</button>
+        <fieldset class="dependencies">
+          <legend>Set your dependencies:</legend>
+        </fieldset>
 
-      <fieldset class="dependencies">
-        <legend>Set your dependencies:</legend>
-        <button id="btn-dependencies" type="button">SET</button>
-      </fieldset>
+        <button id="btn-submit" type="button">SET</button>
+      </form>
     </main>
   </body>
 </html>
