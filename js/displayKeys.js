@@ -11,9 +11,13 @@ function getKeys(table_id) {
   return tables[table_id].calculateMinimalKeys().MINIMAL_KEYS;
 }
 
+function getNf3(table_id, key) {
+  return tables[table_id].decompositionTo3nf(key);
+}
+
 function displayKeys(keys, e) {
   let keysDiv = e.srcElement.nextSibling;
-
+  const index = findIndexOfTable(tables, e.target.dataset.id);
   if (!keysDiv) {
     keysDiv = document.createElement("UL");
     e.srcElement.insertAdjacentElement("afterend", keysDiv);
@@ -24,6 +28,9 @@ function displayKeys(keys, e) {
   keys.forEach((key) => {
     const keyNode = document.createElement("LI");
     keyNode.classList.add("tables__key");
+    keyNode.addEventListener("click", () => {
+      getNf3(index, key);
+    });
     keyNode.textContent = key;
     keysDiv.appendChild(keyNode);
   });

@@ -4,6 +4,7 @@ export class Candidate {
     this.TABLE = table;
     this.DEPENDENCIES = dependencies;
     this.MINIMAL_KEYS = [];
+    this.nf3 = [];
   }
 
   expandKey(firstKey, rightAttributes, helpers) {
@@ -97,5 +98,50 @@ export class Candidate {
     this.filterMinimalKeys();
 
     return this;
+  }
+
+  checkIfIn(string) {
+    for (const dep of this.nf3) {
+      let i = 0;
+      for (const letter of string) {
+        if (dep.includes(letter)) {
+          i++;
+        }
+      }
+      if (i == string.length) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  joinArray(array) {
+    let joinedKey = "";
+
+    for (const k of array) {
+      if (k != ",") {
+        joinedKey += k;
+      }
+    }
+
+    return joinedKey;
+  }
+
+  decompositionTo3nf(key) {
+    this.nf3 = [];
+    let joinedKey = this.joinArray(key);
+
+    for (const [left, right] of this.DEPENDENCIES) {
+      const new_dep = this.joinArray(left + right);
+      if (this.checkIfIn(new_dep)) {
+        this.nf3.push(new_dep);
+      }
+    }
+
+    if (this.checkIfIn(joinedKey)) {
+      this.nf3.push(joinedKey);
+    }
+    console.log(this.nf3);
+    return this.nf3;
   }
 }
